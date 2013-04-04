@@ -8,7 +8,7 @@
 		}
 		o.w = (o === envoy ? that : new Worker(script));
 		o.w.addEventListener("message", function(event) {
-			o.e[event.data.t].forEach(function(v) { v.call(null, event.data.d); });
+			o.e[event.data.t] && o.e[event.data.t].forEach(function(v) { v.apply(null, event.data.d); });
 		}, false);
 		o.e = {};
 		return o;
@@ -21,8 +21,9 @@
 		off: function(type, callback) {
 			this.e[type].filter(function(v) { return v !== callback; });
 		},
-		trigger: function(type, data) {
-			this.w.postMessage({t: type, d: data});
+		emit: function() {
+			var argv = [].slice.call(arguments);
+			this.w.postMessage({t: argv.shift(), d: argv});
 		}
 	};
 	Object.keys(envoy.prototype).forEach(function(k) {

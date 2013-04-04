@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Test</title>
+</head>
+<body>
+	Send envoy message:
+	<div>
+		<label>Message:</label>
+		<br>
+		<textarea id="message"></textarea>
+		<br>
+		<button id="send">Send</button>
+	</div>
+
+	Ask envoy to delegate new envoy:
+	<div>
+		<label>Name:</label>
+		<br>
+		<input type="text" name="name" id="name">
+		<br>
+		<button id="delegate">Delegate</button>
+	</div>
+
+	<script src="../src/envoy.min.js"></script>
+	<script>
+		var child = envoy("child.js");
+		child.on("pong", function(message) {
+			console.log(message);
+		});
+
+		var message = document.getElementById("message"),
+			send = document.getElementById("send");
+		send.onclick = function() {
+			console.log("Sending "+ message.value +"...");
+			child.emit("ping", message.value);
+			return false;
+		};
+
+		var name = document.getElementById("name"),
+			delegate = document.getElementById("delegate");
+		delegate.onclick = function() {
+			child.emit("delegate", name.value);
+			return false;
+		};
+	</script>
+</body>
+</html>
