@@ -1,5 +1,5 @@
 # envoy.js
-envoy.js is a small script that allows you to delegate computationally expensive tasks to Web Workers with pub/sub (publish/subscribe) capabilities.
+envoy.js is a library that allows you to delegate computationally expensive tasks to Web Workers with pub/sub (publish/subscribe) capabilities.
 
 ## How to use
 Page:
