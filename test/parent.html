@@ -14,7 +14,7 @@
 		<button id="send">Send</button>
 	</div>
 
-	Ask envoy to delegate new envoy:
+	Ask envoy to delegate new envoy (for browsers that support nested workers):
 	<div>
 		<label>Name:</label>
 		<br>
@@ -34,14 +34,14 @@
 			send = document.getElementById("send");
 		send.onclick = function() {
 			console.log("Sending "+ message.value +"...");
-			child.emit("ping", message.value);
+			child.trigger("ping", message.value);
 			return false;
 		};
 
 		var name = document.getElementById("name"),
 			delegate = document.getElementById("delegate");
 		delegate.onclick = function() {
-			child.emit("delegate", name.value);
+			child.trigger("delegate", name.value);
 			return false;
 		};
 	</script>

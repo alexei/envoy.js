@@ -21,7 +21,7 @@
 		off: function(type, callback) {
 			this.e[type].filter(function(v) { return v !== callback; });
 		},
-		emit: function() {
+		trigger: function() {
 			var argv = [].slice.call(arguments);
 			this.w.postMessage({t: argv.shift(), d: argv});
 		}

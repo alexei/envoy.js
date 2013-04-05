@@ -11,7 +11,7 @@ Page:
 		worker.on("hello-back", function(message) {
 			console.log(message);
 		});
-		worker.emit("hello", "Hi there!");
+		worker.trigger("hello", "Hi there!");
 	</script>
 
 Worker:
@@ -20,7 +20,7 @@ Worker:
 	importScripts("envoy.min.js");
 
 	envoy.on("hello", function(message) {
-		envoy.emit("hello-back", "Oh, hello!");
+		envoy.trigger("hello-back", "Oh, hello!");
 	});
 
 ## API
@@ -36,9 +36,9 @@ To remove events, call the `off` method:
 
 	off(eventType, callback)
 
-To trigger events, call the `emit` method:
+To trigger events, call the `trigger` method:
 
-	emit(eventType[, param1[, param2[, ...]]])
+	trigger(eventType[, param1[, param2[, ...]]])
 
 Note that inside workers, the `envoy` object refers to the current running worker.
 
